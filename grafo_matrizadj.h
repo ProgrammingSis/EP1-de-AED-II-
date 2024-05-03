@@ -1,5 +1,5 @@
-#define false 0;
-#define true 1;
+#include <stdbool.h>
+
 //typedef int bool; IS THIS NECESSARY include bool
 
 /*ESSA PARTE ACIMA É UMA GAMBIARRA PORQUE NÃO CONSEGUI COLOCAR O INCLUDE DE STDBOOL*/

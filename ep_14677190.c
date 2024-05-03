@@ -8,7 +8,7 @@
 
   Preciso de:
 
-    * Entender o que vai no .c e o que vai no .h
+    * Entender o que vai no .c e o que vai no .h (prontooo)
 
     * Como colocar o include no .h, é no .h mesmo
 

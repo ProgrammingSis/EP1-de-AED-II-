@@ -41,3 +41,11 @@ Apontador proxListaAdj(Grafo* grafo, int v, Apontador atual) {
   /*n tá certo isso aqui*/
   return atual->prox;
 }
+insereARESTA(int v1, int v2, Peso peso, Grafo* grafo){
+  
+};
+ existeAresta(int v1, int v2, Grafo* grafo);
+ removeAresta(int v1, int v2, Peso peso, Grafo* grafo);
+ listADJVazia(int v, Grafo* grafo);
+ primeiroListaAdj(int v, Grafo* grafo);
+ liberaGrafo(Grafo* grafo);

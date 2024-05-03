@@ -1,6 +1,6 @@
 #include "busca_profundidade.h"
 #include "busca.h"
-#include "grafo.h"
+//#include "grafo.h"
 #include <stdio.h>
 
 // Identifica o tipo de uma aresta
