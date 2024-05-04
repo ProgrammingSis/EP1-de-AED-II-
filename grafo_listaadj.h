@@ -1,9 +1,10 @@
 #define AN -1 //aresta nula (ausência e aresta)
 #define VERTICE_INVALIDO -1
 typedef int Peso;
+#include <stdbool.h>
 
 typedef struct str_aresta{
-  int vdest;
+  int verticeIndice;
   Peso peso;
   struct str_aresta* prox;
 } Aresta;
@@ -21,7 +22,7 @@ void insereARESTA(int v1, int v2, Peso peso, Grafo* grafo);
 bool existeAresta(int v1, int v2, Grafo* grafo);
 void removeAresta(int v1, int v2, Peso peso, Grafo* grafo);
 bool listADJVazia(int v, Grafo* grafo);
-int primeiroListaAdj(int v, Grafo* grafo);
-int proxListaAdj(int v, Grafo grafo, int prox);
+Apontador primeiroListaAdj(int v, Grafo* grafo);
+Apontador proxListaAdj(int v, Grafo grafo, int prox);
 void imprimeGrafo(Grafo* grafo);
 void liberaGrafo(Grafo* grafo);

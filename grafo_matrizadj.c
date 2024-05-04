@@ -35,7 +35,7 @@ bool verticeValido(Grafo * grafo, int vertice) {
   }
 
   return true;
-}
+};
 
  insereARESTA(int v1, int v2, Peso peso, Grafo* grafo){
   if (!verticeValido(grafo, v1) && !verticeValido(grafo, v2)) return;
@@ -56,6 +56,8 @@ bool verticeValido(Grafo * grafo, int vertice) {
 
  };
  primeiroListaAdj(int v, Grafo* grafo){
+
+
 
  };
  proxListaAdj(int v, Grafo grafo, int prox){
