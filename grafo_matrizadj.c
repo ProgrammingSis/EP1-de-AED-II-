@@ -21,7 +21,8 @@ inicializaGrafo(Grafo* grafo, int nv){
   grafo->numVertices = nv;
   grafo->numArestas = 0;
   return true;
-}; 
+}
+
 bool verticeValido(Grafo * grafo, int vertice) {
   
   if (vertice <= 0) {
@@ -35,40 +36,40 @@ bool verticeValido(Grafo * grafo, int vertice) {
   }
 
   return true;
-};
+}
 
  insereARESTA(int v1, int v2, Peso peso, Grafo* grafo){
   if (!verticeValido(grafo, v1) && !verticeValido(grafo, v2)) return;
   grafo->mat[v1][v2] = peso;
   grafo->numArestas++;
- };
+ }
 
  existeAresta(int v1, int v2, Grafo* grafo){
   if(!verticeValido(grafo, v1) || !verticeValido(grafo, v2))
     return false;
   
- };
+ }
  removeAresta(int v1, int v2, Peso peso, Grafo* grafo){
 
- };
+ }
 
  listADJVazia(int v, Grafo* grafo){
 
- };
+ }
  primeiroListaAdj(int v, Grafo* grafo){
 
 
 
- };
+ }
  proxListaAdj(int v, Grafo grafo, int prox){
 
- };
+ }
 
  imprimeGrafo(Grafo* grafo){
 
- };
+ }
  liberaGrafo(Grafo* grafo){
 
- };
+ }
 
 
