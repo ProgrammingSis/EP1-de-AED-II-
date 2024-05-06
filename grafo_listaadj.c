@@ -29,9 +29,11 @@ bool inicializaGrafo(Grafo* grafo, int numVertices) {
 
 void imprimeGrafo(Grafo* grafo){	
 	for(int i = 0; i< grafo->numVertices; i++){
+		printf("Adjacentes de %i:\n", i);
 		Apontador atual = grafo->listaAdj[i];
 		while(atual != NULL){
-			printf("[Vertice número %i: peso %i]	", grafo->listaAdj[i]->verticeIndice, grafo->listaAdj[i]->peso);
+			printf("  [%i: Peso %i ]\n", atual->verticeIndice, atual->peso);
+			atual = atual->prox;
 		}
 	}
 } 

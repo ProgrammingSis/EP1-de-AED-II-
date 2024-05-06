@@ -6,13 +6,28 @@
 #include <stdio.h>
 #include <assert.h>
 
+typedef enum {
+	BRANCO, CINZA, PRETO
+} Cor;
+
+typedef struct {
+	Cor* cor;
+	int* tempoDescoberta;
+	int* tempoFechamento;
+	int* antecessor;	
+	int* distancia;
+} Busca;
+
 void leGrafo(Grafo* grafo, char* arquivo);
+void buscaProfundidade(Grafo* grafo);
+void visitaProfundidade(Grafo* grafo, int vert, Busca busca);
 
 int main(int argc, char* argv[]){
 	Grafo grafo;
 	Grafo* g = &grafo;
 
-	leGrafo(g, "entrada.txt");// colocar o parametro recebido no terminal aqui
+	// colocar o parametro recebido no terminal aqui
+	leGrafo(g, "testes/entrada1.txt");
 
 	//inicializaGrafo(g, 9);
 	
@@ -21,7 +36,24 @@ int main(int argc, char* argv[]){
 	return 0;
 }
 
-void leGrafo(Grafo* grafo, char* arquivo) {
+void leGrafo(Grafo* grafo, char* entrada) {
+	FILE* arquivo = fopen(entrada, "r");
+	int numArestas, numVertices, v1, v2, peso;
+
+	fscanf(arquivo, "%i %i", &numVertices, &numArestas);
+	inicializaGrafo(grafo, numVertices);
+
+	for(int i = 0; i < numArestas; i++){
+		fscanf(arquivo, "%i %i %i", &v1, &v2, &peso);
+		insereAresta(grafo, v1,  v2, peso);
+	}
+}
+
+void buscaProfundidade(Grafo* grafo) {
+
+}
+
+void visitaProfundidade(Grafo* grafo, int vert, Busca busca) {
 
 }
 
