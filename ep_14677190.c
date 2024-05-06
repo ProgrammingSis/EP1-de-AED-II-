@@ -151,7 +151,7 @@ void visitaBP(int v, Grafo* grafo, bool* cor, int* tdesc, int* tterm, int* antec
 			antecessor[adjacente]=v;
             visitaBP(adjacente, grafo, cor, tdesc, tterm, antecessor,tempo);
 		}
-		apontador= proxListaAdj(grafo, v, apontador);
+		apontador= proxListaAdj(v, *grafo, apontador);
 	}
 	tterm[v]=++(*tempo);
 }
@@ -172,6 +172,8 @@ void buscaEmProfundidade(Grafo* grafo){
 	}
 }
 
-int main(int arg c, argv**){
+int main(int argc, char** argv){
 
+
+return 0;
 }
