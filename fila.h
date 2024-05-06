@@ -10,6 +10,7 @@
 typedef struct self {
 	int item;
 	struct self* prox;
+	struct self* ant;
 } NoFila;
 
 typedef struct {

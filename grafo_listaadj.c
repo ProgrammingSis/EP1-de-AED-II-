@@ -66,11 +66,12 @@ Apontador proxListaAdj(Grafo* grafo, int v, Apontador atual) {
  
     grafo->numArestas++;
 }
+
  existeAresta(int v1, int v2, Grafo* grafo){
    if (!verticeValido(grafo, v1) && !verticeValido(grafo, v2)) return false;
 
    Apontador atual = grafo->listaAdj[v1];
-   while(atual ){
+   while(atual){
     if(atual->verticeIndice == v2){
       return true;
     }
@@ -82,15 +83,31 @@ Apontador proxListaAdj(Grafo* grafo, int v, Apontador atual) {
  }
 
  removeAresta(int v1, int v2, Peso peso, Grafo* grafo){
+    if(!existeAresta(v1, v2, grafo)){
+      return false;
+    }
 
  }
  listADJVazia(int v, Grafo* grafo){
 
  }
+ 
  primeiroListaAdj(int v, Grafo* grafo){
-  return (grafo->listaAdj[vertice]);
+  return (grafo->listaAdj[v]);
  }
 
  liberaGrafo(Grafo* grafo){
+  int vertice;
+  Apontador aresta;
 
+  for (vertice = 0; vertice <= grafo->numVertices; vertice++)
+    while ((aresta = grafo->listaAdj[vertice]) != NULL) {
+      grafo->listaAdj[vertice] = aresta->prox;
+      aresta->prox = NULL;
+      free(aresta);
+    }
+
+  grafo->numVertices = 0;
+  free(grafo->listaAdj); // pois o vetor tb tem alocacao dinamica
+  grafo->listaAdj = NULL;
  }

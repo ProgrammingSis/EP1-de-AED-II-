@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include <stdio.h>
 
 //typedef int bool; IS THIS NECESSARY include bool
 
@@ -17,9 +18,9 @@ typedef struct{
 } Grafo;
 
 bool inicializaGrafo(Grafo* grafo, int nv);
-void insereARESTA(int v1, int v2, Peso peso, Grafo* grafo);
+void insereAresta(int v1, int v2, Peso peso, Grafo* grafo);
 bool existeAresta(int v1, int v2, Grafo* grafo);
-void removeAresta(int v1, int v2, Peso peso, Grafo* grafo);
+bool removeAresta(int v1, int v2, Peso peso, Grafo* grafo);
 bool listADJVazia(int v, Grafo* grafo);
 Apontador primeiroListaAdj(int v, Grafo* grafo);
 Apontador proxListaAdj(int v, Grafo grafo, int prox);
