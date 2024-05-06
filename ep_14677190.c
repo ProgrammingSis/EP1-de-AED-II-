@@ -82,14 +82,15 @@ struct BuscaType {
 
 	// Acessos da busca. Cada acesso permite observar o estado eventos durante a execução da busca
 	// e opcionalmente alterar o seu rumo
-	Acessos acessos;
+
+	//Acessos acessos;
 
 	// Vértice início da busca. Por padrão possui valor -1, mas se configurado, a busca irá
 	// explorar apenas o início
 	int inicio;
 
 	// Objeto do usuário. Não será alterado ou acessado pelo mecanismo de busca.
-	void* objeto;
+	void* objeto; //hein
 	
 	// -- Estado da busca e resultados --
 
@@ -102,13 +103,13 @@ struct BuscaType {
 	// Vetor de tempo de descoberta dos vértices
 	int* tempoDesc;
 
-	// Vetor do tempo de término dos vértices
+	// Vetor do tempo de término dos vértices. O QUE ISSO SIGNIFICA
 	int* tempoTerm;
 
-	// Vetor de antecessores de cada vértice do grafo
+	// Vetor de antecessores de cada vértice do grafo AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 	int* antecessor;
 
-	// Vetor de distâncias de cada vértice em relação a raiz da árvore de busca
+	// Vetor de distâncias de cada vértice em relação a raiz da árvore de busca. PARA QUEEEEE
 	int* distancia;
 };
 /* O arquivo Makefile NÃO deverá ser entregue
@@ -172,7 +173,16 @@ void buscaEmProfundidade(Grafo* grafo){
 	}
 }
 
-int main(int argc, char** argv){
+int main(int argc, char* argv[]){
+
+if (argc != 3){
+        printf("Este programa exige dois argumentos: TAL e TAL\n"); /* COMPLETAR */
+        exit(1);
+    }
+
+    printf("%s ", argv[0]);
+    printf("%s ", argv[1]);
+    printf("%s\n", argv[2]);
 
 
 return 0;
