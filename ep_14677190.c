@@ -3,11 +3,29 @@
 #else
 #include "grafo_listaadj.h"
 #endif
-
 #include <stdio.h>
-#include <assert.h> /*tá no ep do andré, retirar, please*/
-#define MAXNUMVERTICES 100
+#include <assert.h>
 
+void leGrafo(Grafo* grafo, char* arquivo);
+
+int main(int argc, char* argv[]){
+	Grafo grafo;
+	Grafo* g = &grafo;
+
+	leGrafo(g, "entrada.txt");// colocar o parametro recebido no terminal aqui
+
+	//inicializaGrafo(g, 9);
+	
+	imprimeGrafo(g);
+
+	return 0;
+}
+
+void leGrafo(Grafo* grafo, char* arquivo) {
+
+}
+
+/*
 typedef struct a {
 	int item;
 	struct a* prox;
@@ -111,7 +129,7 @@ struct BuscaType {
 
 	// Vetor de distâncias de cada vértice em relação a raiz da árvore de busca. PARA QUEEEEE
 	int* distancia;
-};
+};*/
 /* O arquivo Makefile NÃO deverá ser entregue
 
   Preciso de:
@@ -137,7 +155,7 @@ struct BuscaType {
 */
 
 
-
+/*
 void visitaBP(int v, Grafo* grafo, bool* cor, int* tdesc, int* tterm, int* antecessor, int* tempo){
 	cor[v]= true;
 	tdesc[v]=++(*tempo);
@@ -171,19 +189,5 @@ void buscaEmProfundidade(Grafo* grafo){
 			visitaBP(v, grafo, cor, tdesc, tterm, antecessor, tempo);
 		}
 	}
-}
+}*/
 
-int main(int argc, char* argv[]){
-
-if (argc != 3){
-        printf("Este programa exige dois argumentos: TAL e TAL\n"); /* COMPLETAR */
-        exit(1);
-    }
-
-    printf("%s ", argv[0]);
-    printf("%s ", argv[1]);
-    printf("%s\n", argv[2]);
-
-
-return 0;
-}

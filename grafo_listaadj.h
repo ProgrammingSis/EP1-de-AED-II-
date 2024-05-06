@@ -18,11 +18,13 @@ typedef struct{
 } Grafo;
 
 bool inicializaGrafo(Grafo* grafo, int nv);
-void insereARESTA(int v1, int v2, Peso peso, Grafo* grafo);
-bool existeAresta(int v1, int v2, Grafo* grafo);
-void removeAresta(int v1, int v2, Peso peso, Grafo* grafo);
-bool listADJVazia(int v, Grafo* grafo);
-Apontador primeiroListaAdj(int v, Grafo* grafo);
-Apontador proxListaAdj(int v, Grafo grafo, int prox);
+void insereAresta(Grafo* grafo, int v1, int v2, Peso peso);
+bool existeAresta(Grafo* grafo, int v1, int v2);
+Apontador primeiroListaAdj(Grafo* grafo, int v);
+Apontador proxListaAdj(Grafo* grafo, int vert, Apontador atual);
+bool removeAresta(Grafo* grafo, int v1, int v2, Peso* peso);
+bool listaAdjVazia(Grafo* grafo, int v);
 void imprimeGrafo(Grafo* grafo);
 void liberaGrafo(Grafo* grafo);
+int verticeDestino(Apontador ap);
+bool apValido(Apontador ap);
