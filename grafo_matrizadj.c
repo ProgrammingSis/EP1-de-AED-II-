@@ -14,25 +14,26 @@ bool inicializaGrafo(Grafo* grafo, int nv){
 		return false;
 	}
 
+    grafo->numVertices = nv;
+
 	for(int i=0; i < grafo->numVertices; i++){
 		for(int j=0; j < grafo->numVertices; j++){
 			grafo->mat[i][j] = AN;
 		}
 	}
 
-	grafo->numVertices = nv;
 	grafo->numArestas = 0;
 	return true;
 }
 
 bool verticeValido(Grafo * grafo, int vertice) {
-	if (vertice <= 0) {
-		fprintf(stderr, "ERRO: Numero do vértice (%d) deve ser >=0.", vertice);
+	if (vertice < 0) {
+		fprintf(stderr, "ERRO: Numero do vértice (%d) deve ser >=0.\n", vertice);
 		return false;
 	}
 
 	if (vertice > grafo->numVertices) {
-		fprintf(stderr, "ERRO: Numero do vértice (%d) maior que o numero total de vértices (%d)", vertice, grafo->numVertices);
+		fprintf(stderr, "ERRO: Numero do vértice (%d) maior que o numero total de vértices (%d)\n", vertice, grafo->numVertices);
 		return false;
 	}
 

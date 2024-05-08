@@ -167,3 +167,14 @@ void liberaGrafo(Grafo* grafo){
 
 	return true;
 }
+
+bool apValido(Apontador ap){
+	if(ap == NULL) 
+		return false;
+	else 
+		return true;
+}
+
+int verticeDestino(Apontador ap){
+	return ap->verticeIndice;
+}

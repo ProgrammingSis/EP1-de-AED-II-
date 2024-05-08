@@ -4,7 +4,11 @@
 #include "grafo_listaadj.h"
 #endif
 #include <stdio.h>
+#include <stdlib.h>
 #include <assert.h>
+#include <limits.h>
+
+const int INFINITO = 2147483647;
 
 typedef enum {
 	BRANCO, CINZA, PRETO
@@ -20,24 +24,49 @@ typedef struct {
 
 void leGrafo(Grafo* grafo, char* arquivo);
 void buscaProfundidade(Grafo* grafo);
-void visitaProfundidade(Grafo* grafo, int vert, Busca busca);
+void visitaProfundidade(Grafo* grafo, Busca busca, int* temp, int vert, int prof);
+
+FILE* arquivoSaida = NULL;
 
 int main(int argc, char* argv[]){
 	Grafo grafo;
 	Grafo* g = &grafo;
 
+//	if (argc < 3) {
+//		fprintf(stderr, "Argumentos insuficientes (%i).\n", argc);
+//		return -1;
+//}
+
+	char* nomeArquivoEntrada = argv[1];
+	char* nomeArquivoSaida = argv[2];
+
+	nomeArquivoEntrada = "testes/entrada1.txt"; //desativar isso antes de entregar
+	nomeArquivoSaida = "saida.txt";
+
 	// colocar o parametro recebido no terminal aqui
-	leGrafo(g, "testes/entrada1.txt");
+	leGrafo(g, nomeArquivoEntrada);
 
 	//inicializaGrafo(g, 9);
 	
 	imprimeGrafo(g);
+
+	arquivoSaida = fopen(nomeArquivoSaida, "w");
+	if (!arquivoSaida) {
+		fprintf(stderr, "Falha ao abrir arquivo de saída '%s'\n", nomeArquivoSaida);
+		return -1;
+	}
+	buscaProfundidade(g);
 
 	return 0;
 }
 
 void leGrafo(Grafo* grafo, char* entrada) {
 	FILE* arquivo = fopen(entrada, "r");
+	if (!arquivo) {
+		fprintf(stderr, "Falha ao abrir arquivo de entrada '%s'\n", entrada);
+		exit(-1);
+	}
+
 	int numArestas, numVertices, v1, v2, peso;
 
 	fscanf(arquivo, "%i %i", &numVertices, &numArestas);
@@ -45,16 +74,106 @@ void leGrafo(Grafo* grafo, char* entrada) {
 
 	for(int i = 0; i < numArestas; i++){
 		fscanf(arquivo, "%i %i %i", &v1, &v2, &peso);
+
+		printf("Inserindo aresta %i -> %i, w: %i\n", v1, v2, peso);
 		insereAresta(grafo, v1,  v2, peso);
 	}
 }
 
-void buscaProfundidade(Grafo* grafo) {
+void imprimeCaminho(Busca busca, int vert){
 
+	if(busca.antecessor[vert] != -1){
+	imprimeCaminho(busca, busca.antecessor[vert]);
+	}
+	fprintf(arquivoSaida, "%i ", vert);
 }
 
-void visitaProfundidade(Grafo* grafo, int vert, Busca busca) {
+void buscaProfundidade(Grafo* grafo) {
+	int numVertices = grafo->numVertices;
+	
+	// Inicializa o espaço de memória para cada vetor
+	Cor cor[numVertices];
+	int antecessor[numVertices];
+	int distancia[numVertices];
+	int tempoDesc[numVertices];
+	int tempoFech[numVertices];
 
+	// Contador global do tempo do algoritmo
+	int tempo = 0;
+
+	/*INICIALIZANDO AS VARIÁVEIS COM INFINITO NO CAMPO DISTÂNCIA, 
+	SEM ANTECESSOR E COM COR BRANCA NO LOOP*/
+
+	// Inicializa as propriedades dos vértices
+	for (int v = 0; v < numVertices; v++) {
+		cor[v] = BRANCO;
+		antecessor[v] = -1;
+		distancia[v] = INFINITO;
+		tempoDesc[v] = 0;
+		tempoFech[v] = 0;
+ 	}
+
+	// Inicializa a estrutura de busca com o endereço de cada um dos vetores,
+	// para facilitar a passagem dos parâmetros
+	Busca busca;
+	busca.antecessor = antecessor;
+	busca.distancia = distancia;
+	busca.cor = cor;
+	busca.tempoDescoberta = tempoDesc;
+	busca.tempoFechamento = tempoFech;
+
+	// Começo da busca em profundidade
+	printf("Busca em profundidade\n");
+
+	fprintf(arquivoSaida, "BP:\n"); 
+
+	// Para cada um dos vértices, executa uma busca em profundidade se ele não
+	// foi descoberto ainda (for branco)
+	for (int v = 0; v < numVertices; v++) {
+		if (cor[v] == BRANCO) {
+			busca.distancia[v] = 0;
+			visitaProfundidade(grafo, busca, &tempo, v, 0);
+		}
+	}	
+	 fprintf(arquivoSaida, "\n\nCaminhos BP:\n");
+	for(int i = 0; i < grafo->numVertices; i++){
+		imprimeCaminho(busca, i);
+		fprintf(arquivoSaida, "\n");
+	}
+}
+
+void visitaProfundidade(Grafo* grafo, Busca busca, int* tempo, int vert, int prof) {
+	
+	busca.cor[vert] = CINZA;
+	fprintf(arquivoSaida,"%i ", vert);
+	(*tempo)++;
+	busca.tempoDescoberta[vert] = (*tempo);
+	printf("%*s Descobri o vértice %i no tempo %i.\n", prof*2, "", vert, (*tempo));
+
+	 //posição do vertice adjacente
+	Apontador apontador = primeiroListaAdj(grafo, vert);
+
+	//o verdadeiro núm q representa o vertice adjacente (índice)
+	//int verticeAdjacente = verticeDestino(apontador); 
+
+	// itera até o final da lista de adjacência
+	 
+	while(apValido(apontador)){
+		int verticeAdjacente = verticeDestino(apontador);
+		printf("%*s O vértice adjacente é: %i .\n", prof*2, "", verticeAdjacente);
+		
+
+		if(busca.cor[verticeAdjacente] == BRANCO){
+			busca.distancia[verticeAdjacente] = busca.distancia[vert]+1;
+			busca.antecessor[verticeAdjacente] = vert;
+			visitaProfundidade(grafo, busca, tempo, verticeAdjacente,  prof+1);
+		}
+
+		apontador = proxListaAdj(grafo, vert, apontador);
+	}
+	busca.cor[vert] = PRETO;
+	(*tempo)++;
+	busca.tempoFechamento[vert] = (*tempo);
 }
 
 /*
