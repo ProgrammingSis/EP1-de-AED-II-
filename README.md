@@ -11,3 +11,4 @@ A proposta do trabalho é de adaptar o código para que ele seja mais modular fa
   > make mat
 
 - Para rodar funções relacionadas com listas
+  > make lis
